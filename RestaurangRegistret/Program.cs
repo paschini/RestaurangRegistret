@@ -24,10 +24,54 @@
                 $"Namn {addedEmployee.firstName} {addedEmployee.lastName} och lön {addedEmployee.salary} \n");
         }
 
-        static void ShowEmployees()
+        static void UpdateEmployee()
         {
-            Console.WriteLine("Lista över alla anställda:\n");
-            employees.ListEmployees();
+            Console.WriteLine("Ange förnamn på den anställde som du vill uppdatera:");
+            string firstName = Console.ReadLine() ?? string.Empty;
+
+            Console.WriteLine("Ange efternamn på den anställde som du vill uppdatera:");
+            string lastName = Console.ReadLine() ?? string.Empty;
+
+            Console.WriteLine("Ange den nya lönen för den anställde:");
+            double newSalary;
+
+            while (!double.TryParse(Console.ReadLine(), out newSalary))
+            {
+                Console.WriteLine("Ogiltig inmatning. Vänligen ange sifran på format: '30000,55'\n");
+            }
+            
+            Employee? updatedEmployee = employees.Update(firstName, lastName, newSalary);
+            
+            if (updatedEmployee != null)
+            {
+                Console.WriteLine($"Anställd uppdaterad:\n" +
+                    $"Namn {updatedEmployee.firstName} {updatedEmployee.lastName} med ny lön {updatedEmployee.salary} \n");
+            }
+            else
+            {
+                Console.WriteLine("Anställd hittades inte i registret.\n");
+            }
+        }
+
+        static void RemoveEmployee()
+        {
+            Console.WriteLine("Ange förnamn på den anställde som du vill ta bort:");
+            string firstName = Console.ReadLine() ?? string.Empty;
+            
+            Console.WriteLine("Ange efternamn på den anställde som du vill ta bort:");
+            string lastName = Console.ReadLine() ?? string.Empty;
+            
+            Employee? removedEmployee = employees.Remove(firstName, lastName);
+            
+            if (removedEmployee != null)
+            {
+                Console.WriteLine($"Anställd borttagen från registret:\n" +
+                    $"Namn {removedEmployee.firstName} {removedEmployee.lastName}\n");
+            }
+            else
+            {
+                Console.WriteLine("Anställd hittades inte i registret.\n");
+            }
         }
 
         static void ShowMenu()
@@ -41,7 +85,9 @@
                 Console.WriteLine("Meny:\n");
                 Console.WriteLine("1 Lägg till anställd");
                 Console.WriteLine("2 Visa alla anställda");
-                Console.WriteLine("x Avsluta programmet\n");
+                Console.WriteLine("3 Uppdatera anställds lön");
+                Console.WriteLine("4 Ta bort anställd\n");
+                Console.WriteLine("x Avsluta programmet");
 
                 option = Console.ReadLine() ?? string.Empty;
 
@@ -52,7 +98,13 @@
                         break;
 
                     case "2":
-                        ShowEmployees();
+                        employees.ListEmployees();
+                        break;
+                    case "3":
+                        UpdateEmployee();
+                        break;
+                    case "4":
+                        RemoveEmployee();
                         break;
                     case "x":
                         Console.WriteLine("Avslutar programmet...");

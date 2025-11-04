@@ -22,7 +22,7 @@ public class Employees
         return null;
     }
 
-    Employee? Update(string firstName, string lastName, double newSalary)
+    public Employee? Update(string firstName, string lastName, double newSalary)
     {
         var emp = Find(firstName, lastName);
         if (emp != null)
@@ -32,7 +32,7 @@ public class Employees
         return emp;
     }
 
-    Employee? Remove(string firstName, string lastName)
+    public Employee? Remove(string firstName, string lastName)
     {
         var emp = Find(firstName, lastName);
         if (emp != null)
@@ -44,6 +44,7 @@ public class Employees
 
     public void ListEmployees()
     {
+        Console.WriteLine("Lista över alla anställda:\n");
         if (all.Count > 0)
         {
             foreach (var emp in all)
