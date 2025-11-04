@@ -2,8 +2,7 @@
 {
     internal class Program
     {
-        static List<Employee> employees = new List<Employee>();
-
+        static Employees employees = new Employees();
         static void AddEmployee()
         {
             Console.WriteLine("Ange förnamn på den anställde:");
@@ -19,19 +18,16 @@
                 Console.WriteLine("Ogiltig inmatning. Vänligen ange sifran på format: '30000,55'\n");
             }
 
-            Employee newEmployee = new Employee(firstName, lastName, salary);
-            employees.Add(newEmployee);
+            Employee addedEmployee = employees.Add(firstName, lastName, salary);
 
-            Console.WriteLine($"Anställd tillagd i registret med: Namn {firstName} {lastName} och lön {salary} \n");
+            Console.WriteLine($"Anställd tillagd i registret med:\n" +
+                $"Namn {addedEmployee.firstName} {addedEmployee.lastName} och lön {addedEmployee.salary} \n");
         }
 
         static void ShowEmployees()
         {
             Console.WriteLine("Lista över alla anställda:\n");
-            foreach (var employee in employees)
-            {
-                Console.WriteLine($"Namn: {employee.firstName} {employee.lastName}, Lön: {employee.salary} \n");
-            }
+            employees.ListEmployees();
         }
 
         static void ShowMenu()
@@ -70,7 +66,7 @@
 
         static void Main(string[] args)
         {
-            ShowMenu();
+            ShowMenu();            
         }
     }
 }
