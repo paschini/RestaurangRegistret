@@ -39,7 +39,7 @@ public class Employees
         var emp = FindById(id);
         if (emp != null)
         {
-            emp.salary = newSalary;
+            emp.ChangeSalary(newSalary);
         }
         return emp;
     }
@@ -59,8 +59,7 @@ public class Employees
         var emp = FindById(id);
         if (emp != null)
         {
-            emp.firstName = newFirstName;
-            emp.lastName = newLastName;
+            emp.ChangeName(newFirstName, newLastName);
         }
         return emp;
     }
