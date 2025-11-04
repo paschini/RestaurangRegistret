@@ -61,13 +61,14 @@
 
         static void RemoveEmployee()
         {
-            Console.Write("Ange förnamn på den anställde som du vill ta bort: ");
-            string firstName = Console.ReadLine() ?? string.Empty;
-            
-            Console.Write("Ange efternamn på den anställde som du vill ta bort: ");
-            string lastName = Console.ReadLine() ?? string.Empty;
-            
-            Employee? removedEmployee = employees.Remove(firstName, lastName);
+            Console.Write("Ange id på den anställde som du vill uppdatera: ");
+            int id;
+            while (!int.TryParse(Console.ReadLine(), out id))
+            {
+                Console.WriteLine("Ogiltig inmatning. Vänligen ange en giltig ID\n");
+            }
+
+            Employee? removedEmployee = employees.Remove(id);
             
             if (removedEmployee != null)
             {

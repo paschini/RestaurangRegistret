@@ -44,9 +44,9 @@ public class Employees
         return emp;
     }
 
-    public Employee? Remove(string firstName, string lastName)
+    public Employee? Remove(int id)
     {
-        var emp = FindByFullName(firstName, lastName);
+        var emp = FindById(id);
         if (emp != null)
         {
             all.Remove(emp);
