@@ -2,13 +2,15 @@
 
 public class Employee
 {
-	public string firstName;
-	public string lastName;
-	public double salary;
-	public Employee(string firstName, string lastName, double salary)
-	{
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.salary = salary;
+    public int id { get; private set; }
+    public string firstName { get; set; }
+    public string lastName { get; set; }
+    public double salary { get; set; }
+    public Employee(int id, string firstName, string lastName, double salary)
+    {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.salary = salary;
     }
 }

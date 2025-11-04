@@ -2,15 +2,15 @@
 
 public class Employees
 {
-	List<Employee> all = new List<Employee>();
+    List<Employee> all = new List<Employee>();
 
     public Employee Add(string FirstName, string lastName, double salary)
     {
-        all.Add(new Employee(FirstName, lastName, salary));
+        all.Add(new Employee(all.Count + 1, FirstName, lastName, salary));
         return all[^1];
     }
 
-    Employee? Find(string firstName, string lastName)
+    public Employee? FindByFullName(string firstName, string lastName)
     {
         foreach (var emp in all)
         {
@@ -22,9 +22,21 @@ public class Employees
         return null;
     }
 
-    public Employee? Update(string firstName, string lastName, double newSalary)
+    public Employee? FindById(int id)
     {
-        var emp = Find(firstName, lastName);
+        foreach (var emp in all)
+        {
+            if (emp.id == id)
+            {
+                return emp;
+            }
+        }
+        return null;
+    }
+
+    public Employee? UpdateSalary(int id, double newSalary)
+    {
+        var emp = FindById(id);
         if (emp != null)
         {
             emp.salary = newSalary;
@@ -34,10 +46,21 @@ public class Employees
 
     public Employee? Remove(string firstName, string lastName)
     {
-        var emp = Find(firstName, lastName);
+        var emp = FindByFullName(firstName, lastName);
         if (emp != null)
         {
             all.Remove(emp);
+        }
+        return emp;
+    }
+
+    public Employee? ChangeName(int id, string newFirstName, string newLastName)
+    {
+        var emp = FindById(id);
+        if (emp != null)
+        {
+            emp.firstName = newFirstName;
+            emp.lastName = newLastName;
         }
         return emp;
     }
@@ -47,9 +70,9 @@ public class Employees
         Console.WriteLine("Lista över alla anställda:\n");
         if (all.Count > 0)
         {
-            foreach (var emp in all)
+            foreach (var employee in all)
             {
-                Console.WriteLine($"Namn: {emp.firstName} {emp.lastName} Lön: {emp.salary} \n");
+                Console.WriteLine($"ID: {employee.id} Namn: {employee.firstName} {employee.lastName} Lön: {employee.salary} \n");
             }
         } else
         {
